@@ -116,7 +116,7 @@
     "id": "88f881dc-cc32-4e66-865e-33f0809d6b7f",
     "price": 91526,
     "seller": "Ryan",
-    "byProducts": ["male", "AI", "East"]
+    "byProducts": ["male", "AI", "East", "Random"]
   },
   {
     "name": "Jason",
