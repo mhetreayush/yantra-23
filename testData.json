@@ -1,0 +1,23 @@
+[
+  {
+    "name": "A",
+    "id": "1",
+    "price": 12,
+    "seller": "ASD",
+    "byProducts": ["A", "B", "C"]
+  },
+  {
+    "name": "B",
+    "id": "2",
+    "price": 23,
+    "seller": "D",
+    "byProducts": ["B", "C"]
+  },
+  {
+    "name": "C",
+    "id": "3",
+    "price": 12,
+    "seller": "Q2",
+    "byProducts": ["E", "2", "asd"]
+  }
+]
