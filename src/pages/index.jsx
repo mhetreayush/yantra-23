@@ -10,8 +10,29 @@ import Marquee from "react-fast-marquee";
 import Info from "@/../public/Assets/info.svg";
 import Arrow from "@/../public/Assets/arrow.svg";
 import FeatureModal from "@/component/FeatureModal";
-
+import TopBlob from "@/../public/Assets/BlobTop.svg";
+import BottomBlob from "@/../public/Assets/BlobBottom.svg";
+import Navbar from "@/component/Navbar";
+import { useEffect, useState } from "react";
+import { db } from "@/../firebase";
+import { collection, getDocs } from "firebase/firestore";
 export default function Home() {
+  const [forSale, setForSale] = useState([]);
+  const fetchForSale = async () => {
+    try {
+      const trashSnap = await getDocs(collection(db, "trash"));
+      setForSale(trashSnap.docs.map((doc) => doc.data()));
+      // trashSnap.forEach((doc) => {
+      //   setForSale([...forSale, doc.data()]);
+      //   console.log(doc.data());
+      // });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    fetchForSale();
+  }, []);
   const features = [
     {
       title: "Waste",
@@ -38,11 +59,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col min-h-screen ">
+      <div className="flex flex-col justify-between min-h-screen ">
+        <Navbar />
         {/* <main> */}
-        <div className="py-20 text-black text-center">
-          <h1 className="font-bold text-6xl">LOREM IPSUM DOLOR</h1>
-          <p className="mt-4">sit amet, consectetur adipiscing elit</p>
+        <div className="py-16 text-black text-center">
+          <h1 className="font-bold text-6xl">EcoGo</h1>
+          <p className="mt-4">Sustainable consumption & production</p>
         </div>
         <div className="flex w-full gap-x-4 items-center justify-center">
           <div className="w-full flex justify-center gap-x-8">
@@ -50,10 +72,10 @@ export default function Home() {
               return (
                 <div
                   key={idx}
-                  className=" hover:scale-110 transition-all duration-300 ease-in-out"
+                  className="scale-90  transition-all duration-300 ease-in-out"
                 >
                   <div className="flex flex-col items-center justify-center relative">
-                    <button className="absolute left-[5%] bottom-[25%]">
+                    <button className="absolute left-[7%] bottom-[25%]">
                       {/* <Image src={Info} alt="Info" /> */}
                       <FeatureModal
                         name={feature.title}
@@ -63,7 +85,7 @@ export default function Home() {
                     <Image src={feature.image} alt={feature.title} />
                     <Link
                       href={feature.path}
-                      className="absolute bottom-[10%] right-[10%]"
+                      className="absolute bottom-[10%] right-[10%] hover:scale-125 transition-all duration-300"
                     >
                       <Image src={Arrow} alt="Arrow" />
                     </Link>
@@ -73,21 +95,53 @@ export default function Home() {
             })}
           </div>
         </div>
-        {/* <div className="grow"> */}
-        <Marquee
-          pauseOnHover
-          className="py-4 bg-gradient-to-r from-black via-gray-600 mt-6 to-black"
-        >
-          {[...Array(10)].map((_, idx) => {
-            return (
-              <div key={idx} className="flex gap-x-3 mx-3">
-                <Image src={Iron} alt="Iron" />
-                <Image src={Steel} alt="Steel" />
-              </div>
-            );
-          })}
-        </Marquee>
-        {/* </div> */}
+        <div className="flex w-full">
+          <h1 className="text-white font-bold p-2 mx-auto bg-black">
+            Products for sale:
+          </h1>
+          <Marquee
+            pauseOnHover
+            speed={85}
+            className="bg-gradient-to-r  from-black via-gray-600  to-black "
+          >
+            {forSale.length > 0 &&
+              forSale.map((trash, idx) => {
+                return (
+                  <Link
+                    href={`/trash/${trash.trashId}`}
+                    key={idx}
+                    className="flex gap-x-3 mx-4 p-2 rounded-md bg-gray-200 "
+                  >
+                    {trash.name}
+                  </Link>
+                );
+              })}
+            {forSale.length > 0 &&
+              forSale.map((trash, idx) => {
+                return (
+                  <Link
+                    href={`/trash/${trash.trashId}`}
+                    key={idx}
+                    className="flex gap-x-3 mx-4 p-2 rounded-md bg-gray-200 "
+                  >
+                    {trash.name}
+                  </Link>
+                );
+              })}
+            {forSale.length > 0 &&
+              forSale.map((trash, idx) => {
+                return (
+                  <Link
+                    href={`/trash/${trash.trashId}`}
+                    key={idx}
+                    className="flex gap-x-3 mx-4 p-2 rounded-md bg-gray-200 "
+                  >
+                    {trash.name}
+                  </Link>
+                );
+              })}
+          </Marquee>
+        </div>
         {/* </main> */}
       </div>
     </>

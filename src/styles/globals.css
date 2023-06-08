@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
 
 /* body { */
 /* background-image: url("../../public/Assets/bg.png"); */
@@ -9,9 +10,13 @@
     background-position: center; */
 /* background-attachment: fixed; */
 /* } */
+* {
+    font-family: 'Sen', sans-serif;
+    scroll-behavior: smooth;
+}
 
-@layer components{
-    .muiModalClass{
+@layer components {
+    .muiModalClass {
         @apply md:w-[75%] w-[95%] p-4 h-[95vh] overflow-y-auto;
     }
 }

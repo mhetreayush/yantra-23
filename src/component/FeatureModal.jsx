@@ -10,9 +10,14 @@ const FeatureModal = ({ name, child }) => {
 
   return (
     <div>
-      <button onClick={handleOpen}>
-        <Image src={Info} alt="Info" />
-      </button>
+      {/* <div onClick={handleOpen}> */}
+      <Image
+        onClick={handleOpen}
+        className="hover:scale-125 transition-all duration-300"
+        src={Info}
+        alt="Info"
+      />
+      {/* </div> */}
       <Modal
         open={open}
         onClose={handleClose}
